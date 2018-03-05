@@ -1,0 +1,71 @@
+var mainJS = {
+    helloWorld: function () {
+        'use strict';
+    },
+    
+    homePage: function() {
+        'use strict';
+        //add class for home page logo section
+        if ( window.location.pathname == '/' ){
+            $( '.logo' ).addClass( 'home' );
+        }
+    },
+    
+    carousel: function () {
+        'use strict';
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            items: 1,
+            autoplay: false,
+            smartSpeed: 800
+        });
+    },
+    
+    lightbox: function () {
+        var $lightbox = $("<div class='lightbox'></div>");
+        var $img = $("<img>");
+        var $caption = $("<p class='caption'></p>");
+
+        // Add image and caption to lightbox
+
+        $lightbox
+            .append($img)
+            .append($caption);
+
+        // Add lighbox to document
+
+        $('body').append($lightbox);
+
+        $('.lightbox-gallery img').click(function (e) {
+            e.preventDefault();
+
+            // Get image link and description
+            var src = $(this).attr("src");
+            var cap = $(this).attr("alt");
+
+            // Add data to lighbox
+
+            $img.attr('src', src);
+            $caption.text(cap);
+
+            // Show lightbox
+
+            $lightbox.addClass('active');
+
+            $lightbox.click(function () {
+                $lightbox.removeClass('active');
+            });
+        });
+    }
+
+};
+
+$(function () {
+    'use strict';
+    mainJS.helloWorld();
+    mainJS.homePage();
+    mainJS.lightbox();
+    mainJS.carousel();
+});
+
+
